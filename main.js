@@ -89,11 +89,11 @@ const CommandExecutor = {
             return Codeforces.getUser(cmd.param1);
         }
         if(cmd.op === 'rp' && cmd.paramCount > 0){
-            return BOJ.getRandomProblem(cmd.paramAll.replace(/\//g, ''));
+            return BOJ.getRandomProblem(cmd.paramAll);
         }
         if(cmd.op === 'sp' && cmd.paramCount > 0){
             let prefix = '[[' + cmd.paramAll + ']]\nSpoiler Alert!' + BLANK;
-            return prefix + BOJ.searchProblem(cmd.paramAll.replace(/\//g, ''));
+            return prefix + BOJ.searchProblem(cmd.paramAll);
         }
         if(cmd.op === 'solved' && cmd.hasOwnProperty('param1')){
             return BOJ.getUser(cmd.param1);
