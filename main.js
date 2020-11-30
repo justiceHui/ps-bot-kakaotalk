@@ -89,17 +89,17 @@ const CommandExecutor = {
             return Codeforces.getUser(cmd.param1);
         }
         if(cmd.op === 'rp' && cmd.paramCount > 0){
-            return BOJ.getRandomProblem(cmd.paramAll);
+            return BOJ.getRandomProblem(cmd.paramAll.replace(/\//g, ''));
         }
         if(cmd.op === 'sp' && cmd.paramCount > 0){
-            const prefix = '[[' + cmd.paramAll + ']]\nSpoiler Alert!' + BLANK;
-            return prefix + BOJ.searchProblem(cmd.paramAll);
+            let prefix = '[[' + cmd.paramAll + ']]\nSpoiler Alert!' + BLANK;
+            return prefix + BOJ.searchProblem(cmd.paramAll.replace(/\//g, ''));
         }
         if(cmd.op === 'solved' && cmd.hasOwnProperty('param1')){
             return BOJ.getUser(cmd.param1);
         }
         if(cmd.op === 'ptag' && cmd.hasOwnProperty('param1')){
-            const prefix = '[[' + cmd.param1 + '\'s tag]]\nlink : http://icpc.me/' + cmd.param1 + '\nSpoiler Alert!' + BLANK;
+            let prefix = '[[' + cmd.param1 + '\'s tag]]\nlink : http://icpc.me/' + cmd.param1 + '\nSpoiler Alert!' + BLANK;
             return prefix + BOJ.getProblemTag(cmd.param1);
         }
     },
@@ -127,6 +127,7 @@ const Test = {
         ret += this.describe('BOJ Random Problem(Not Exist)', '/rp tier:b5 tag:tag:segtree') + '\n\n';
         ret += this.describe('BOJ Search Problem(Normal)', '/sp tier:d5..d1 tag:tag:segtree') + '\n\n';
         ret += this.describe('BOJ Search Problem(Not Exist)', '/sp tier:b5 tag:tag:segtree') + '\n\n';
+        ret += this.describe('BOJ Search Problem(Contain /)', '/sp </span>') + '\n\n';
         ret += this.describe('BOJ Problem Tag(Normal)', '/ptag 1000') + '\n\n';
         ret += this.describe('BOJ Problem Tag(Not Exist)', '/ptag 917') + '\n\n';
         return ret;
